@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class SnakeGame {
-    private List<Point> snakeBody = new ArrayList<>();
-    private List<Point> foodPositions = new ArrayList<>();
+    private final List<Point> snakeBody = new ArrayList<>();
+    private final List<Point> foodPositions = new ArrayList<>();
 
     private int time = 0;
     private int score = 0;
@@ -51,51 +51,28 @@ public class SnakeGame {
         if(gameState == GameState.PLAYING)
             return false;
 
-        switch (direction)
+        direction = switch (direction)
         {
             // set direction to last if is reverse of lastDirection
-            case UP:
-                if(lastDirection == Direction.DOWN)
-                    direction = lastDirection;
-                break;
-            case RIGHT:
-                if(lastDirection == Direction.LEFT)
-                    direction = lastDirection;
-                break;
-            case DOWN:
-                if(lastDirection == Direction.UP)
-                    direction = lastDirection;
-                break;
-            case LEFT:
-                if(lastDirection == Direction.RIGHT)
-                    direction = lastDirection;
-                break;
+            case UP -> (lastDirection == Direction.DOWN) ? lastDirection : direction;
+            case RIGHT -> (lastDirection == Direction.LEFT) ? lastDirection : direction;
+            case DOWN -> (lastDirection == Direction.UP) ? lastDirection : direction;
+            case LEFT -> (lastDirection == Direction.RIGHT) ? lastDirection : direction;
             // set direction to last if is none
-            case NONE:
-                direction = lastDirection;
-        }
+            case NONE -> lastDirection;
+        };
 
         Point newPos;
         Point lastPos = snakeBody.get(0);
-        switch (direction)
-        {
-            case UP:
-                newPos = new Point(lastPos.x, lastPos.y - 1);
-                break;
-            case RIGHT:
-                newPos = new Point(lastPos.x + 1, lastPos.y);
-                break;
-            case DOWN:
-                newPos = new Point(lastPos.x, lastPos.y + 1);
-                break;
-            case LEFT:
-                newPos = new Point(lastPos.x - 1, lastPos.y);
-                break;
-            default:
-                // to remove might not be initialized error
-                // should be impossible case, I think
-                newPos = new Point(0,0);
-        }
+        newPos = switch (direction) {
+            case UP -> new Point(lastPos.x, lastPos.y - 1);
+            case RIGHT -> new Point(lastPos.x + 1, lastPos.y);
+            case DOWN -> new Point(lastPos.x, lastPos.y + 1);
+            case LEFT -> new Point(lastPos.x - 1, lastPos.y);
+            // to remove might not be initialized error
+            // should be impossible case, I think
+            default -> new Point(0, 0);
+        };
 
         // end game if out of bounds
         if(
@@ -179,7 +156,7 @@ public class SnakeGame {
 
     public void setWidth(int newWidth) {
         if(gameState != GameState.PLAYING && gameState != GameState.READY)
-            height = newWidth;
+            width = newWidth;
     }
 
     public int getWidth() {
@@ -213,13 +190,13 @@ public class SnakeGame {
 
     public Point[] getSnakeBody() {
         return snakeBody.toArray(
-                new Point[snakeBody.size()]
+                new Point[0]
         );
     }
 
     public Point[] getFoodPositions() {
         return foodPositions.toArray(
-                new Point[foodPositions.size()]
+                new Point[0]
         );
     }
 }
