@@ -48,7 +48,7 @@ public class SnakeGame {
                 gameState = GameState.PLAYING;
 
         // only allow move if game is in PLAYING state
-        if(gameState == GameState.PLAYING)
+        if(gameState != GameState.PLAYING)
             return false;
 
         direction = switch (direction)
