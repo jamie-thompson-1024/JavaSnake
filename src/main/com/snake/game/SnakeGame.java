@@ -97,15 +97,16 @@ public class SnakeGame {
         snakeBody.add(0, newPos);
 
         // check if food eaten
-        boolean foodEaten = false;
+        Point foodEaten = null;
         for(Point pos : foodPositions) {
             if(pos.x == newPos.x && pos.y == newPos.y) {
-                foodEaten = true;
+                foodEaten = pos;
                 break;
             }
         }
 
-        if(foodEaten) {
+        if(foodEaten != null) {
+            foodPositions.remove(foodEaten);
             spawnFood();
             ++score;
         } else {
@@ -119,7 +120,8 @@ public class SnakeGame {
 
     private void spawnFood()
     {
-        int validFoodPositionCount = width * height - snakeBody.size();
+
+        int validFoodPositionCount = (width * height) - snakeBody.size();
 
         // make sure amount of food is equal to foodCount or validFoodPositionCount
         while(foodPositions.size() < foodCount && foodPositions.size() < validFoodPositionCount) {
@@ -128,6 +130,12 @@ public class SnakeGame {
             // check if new point is available
             boolean isOccupied = false;
             for(Point pos : foodPositions) {
+                if(pos.x == newPos.x && pos.y == newPos.y) {
+                    isOccupied = true;
+                    break;
+                }
+            }
+            for(Point pos : snakeBody) {
                 if(pos.x == newPos.x && pos.y == newPos.y) {
                     isOccupied = true;
                     break;
