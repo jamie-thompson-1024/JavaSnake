@@ -119,8 +119,10 @@ public class SnakeGame {
 
     private void spawnFood()
     {
+        int validFoodPositionCount = width * height - snakeBody.size();
+
         // make sure amount of food is equal to foodCount
-        while(foodPositions.size() < foodCount) {
+        while(foodPositions.size() < foodCount && foodPositions.size() < validFoodPositionCount) {
             Point newPos = randomPoint();
 
             // check if new point is available
@@ -146,8 +148,12 @@ public class SnakeGame {
     }
 
     public void setHeight(int newHeight) {
-        if(gameState != GameState.PLAYING && gameState != GameState.READY)
+        if(gameState != GameState.PLAYING) {
+            if(gameState == GameState.READY)
+                gameState = GameState.STOPPED;
+
             height = newHeight;
+        }
     }
 
     public int getHeight() {
@@ -155,8 +161,12 @@ public class SnakeGame {
     }
 
     public void setWidth(int newWidth) {
-        if(gameState != GameState.PLAYING && gameState != GameState.READY)
+        if(gameState != GameState.PLAYING) {
+            if(gameState == GameState.READY)
+                gameState = GameState.STOPPED;
+
             width = newWidth;
+        }
     }
 
     public int getWidth() {
@@ -164,8 +174,12 @@ public class SnakeGame {
     }
 
     public void setFoodCount(int newFoodCount) {
-        if(gameState != GameState.PLAYING && gameState != GameState.READY)
+        if(gameState != GameState.PLAYING) {
+            if(gameState == GameState.READY)
+                gameState = GameState.STOPPED;
+
             foodCount = newFoodCount;
+        }
     }
 
     public int getFoodCount() {
