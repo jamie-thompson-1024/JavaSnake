@@ -12,42 +12,42 @@ public class SnakeGameInitTests {
     }
 
     @Test
-    public void expectGameStateToBeReady() {
+    public void expect_GameState_ToBe_Ready() {
         Assert.assertEquals(
                 game.getGameState(),
                 GameState.READY);
     }
 
     @Test
-    public void expectScoreToBe0() {
+    public void expect_Score_ToBe_0() {
         Assert.assertEquals(
                 game.getScore(),
                 0);
     }
 
     @Test
-    public void expectTimeToBe0() {
+    public void expect_Time_ToBe_0() {
         Assert.assertEquals(
                 game.getTime(),
                 0);
     }
 
     @Test
-    public void expectLastDirectionToBeNone() {
+    public void expect_LastDirection_ToBe_None() {
         Assert.assertEquals(
                 game.getLastDirection(),
                 Direction.NONE);
     }
 
     @Test
-    public void expectSnakeBodyToBeLength1() {
+    public void expect_SnakeBody_ToBe_LengthOf1() {
         Assert.assertEquals(
                 game.getSnakeBody().length,
                 1);
     }
 
     @Test
-    public void expectFoodPositionsToBeLengthFoodCount() {
+    public void expect_FoodPositions_ToBe_LengthOfFoodCount() {
         Assert.assertEquals(
                 game.getFoodPositions().length,
                 game.getFoodCount());
