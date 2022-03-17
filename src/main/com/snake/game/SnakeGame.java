@@ -121,7 +121,7 @@ public class SnakeGame {
     {
         int validFoodPositionCount = width * height - snakeBody.size();
 
-        // make sure amount of food is equal to foodCount
+        // make sure amount of food is equal to foodCount or validFoodPositionCount
         while(foodPositions.size() < foodCount && foodPositions.size() < validFoodPositionCount) {
             Point newPos = randomPoint();
 
