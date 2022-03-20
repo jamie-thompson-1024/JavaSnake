@@ -12,7 +12,7 @@ import java.awt.event.ComponentListener;
 
 public class SnakeUI extends JFrame implements ComponentListener {
 
-    private boolean inMenu = true;
+    private boolean inMenu = false;
 
     private final InputHandler inputHandler = new InputHandler();
     private final UIDataHandler dataHandler = new UIDataHandler();
@@ -24,7 +24,7 @@ public class SnakeUI extends JFrame implements ComponentListener {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Point screenCenter = new Point(screenSize.width / 2, screenSize.height / 2);
-        int frameSize = (int) (Math.min(screenSize.height, screenSize.width) * 0.65);
+        int frameSize = (int) (Math.min(screenSize.height, screenSize.width) * 0.7);
 
         setBounds(
                 screenCenter.x - (frameSize / 2), screenCenter.y - (frameSize / 2),
@@ -48,16 +48,18 @@ public class SnakeUI extends JFrame implements ComponentListener {
 
     private void createComponents() {
 
+        Container cPane = getContentPane();
+
         // Create menu panel
         menu = new SnakeMenu(dataHandler);
         menu.setBackground(new Color(33,33,33,33));
         menu.setDialogBackground(new Color(33,33,33));
         menu.setVisible(inMenu);
-        add(menu);
+        cPane.add(menu);
 
         // Create game panel
         game = new SnakeViewer(dataHandler);
-        add(game);
+        cPane.add(game);
 
         resizeComponents();
     }
@@ -72,9 +74,12 @@ public class SnakeUI extends JFrame implements ComponentListener {
     }
 
     private void resizeComponents() {
-        Dimension frameSize = getSize();
-        if(menu != null) menu.setSize(frameSize);
-        if(game != null) game.setSize(frameSize);
+        Insets insets = getInsets();
+        int currentWidth = getWidth() - insets.left - insets.right;
+        int currentHeight = getHeight() - insets.top - insets.bottom;
+
+        if(menu != null) menu.setBounds(0, 0, currentWidth, currentHeight);
+        if(game != null) game.setBounds(0, 0, currentWidth, currentHeight);
     }
 
     @Override

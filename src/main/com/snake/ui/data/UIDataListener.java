@@ -8,4 +8,5 @@ public interface UIDataListener {
     void updateHighScore(int highScore);
     void onPlay();
     void onEnd();
+    void updateSize(int width, int height);
 }

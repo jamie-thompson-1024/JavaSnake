@@ -1,12 +1,14 @@
 package com.snake.ui.components;
 
 import com.snake.ui.data.UIDataHandler;
+import com.snake.ui.data.UIDataListener;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-public class SnakeScoreBar extends JPanel implements ComponentListener {
+public class SnakeScoreBar extends JPanel implements ComponentListener, UIDataListener {
 
     JLabel scoreLabel;
     JLabel topScoreLabel;
@@ -15,6 +17,8 @@ public class SnakeScoreBar extends JPanel implements ComponentListener {
 
     public SnakeScoreBar(UIDataHandler dataHandler) {
         this.dataHandler = dataHandler;
+        this.dataHandler.addInputListener(this);
+
         addComponentListener(this);
         setLayout(null);
 
@@ -24,11 +28,11 @@ public class SnakeScoreBar extends JPanel implements ComponentListener {
     private void createComponents() {
 
         // create score label
-        scoreLabel = new JLabel();
+        scoreLabel = new JLabel("Score: 0");
         add(scoreLabel);
 
         // create top score label
-        topScoreLabel = new JLabel();
+        topScoreLabel = new JLabel("High score: 0");
         add(topScoreLabel);
 
         resizeComponents();
@@ -39,13 +43,13 @@ public class SnakeScoreBar extends JPanel implements ComponentListener {
         // set score label bounds
         if(scoreLabel != null) scoreLabel.setBounds(
                 0, 0,
-                0, 0
+                getWidth() / 2, getHeight()
         );
 
         // set top score label bounds
         if(topScoreLabel != null) topScoreLabel.setBounds(
-                0, 0,
-                0, 0
+                getWidth() / 2, 0,
+                getWidth() / 2, getHeight()
         );
     }
 
@@ -66,6 +70,36 @@ public class SnakeScoreBar extends JPanel implements ComponentListener {
 
     @Override
     public void componentHidden(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void updateCanvas(Point[] foodPositions, Point[] snakeBody) {
+
+    }
+
+    @Override
+    public void updateScore(int score) {
+        scoreLabel.setText("Score: " + score);
+    }
+
+    @Override
+    public void updateHighScore(int highScore) {
+        topScoreLabel.setText("High Score: " + highScore);
+    }
+
+    @Override
+    public void onPlay() {
+
+    }
+
+    @Override
+    public void onEnd() {
+
+    }
+
+    @Override
+    public void updateSize(int width, int height) {
 
     }
 }

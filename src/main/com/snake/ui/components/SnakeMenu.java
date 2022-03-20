@@ -1,13 +1,14 @@
 package com.snake.ui.components;
 
 import com.snake.ui.data.UIDataHandler;
+import com.snake.ui.data.UIDataListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-public class SnakeMenu extends JPanel implements ComponentListener {
+public class SnakeMenu extends JPanel implements ComponentListener, UIDataListener {
 
     JLabel titleLabel;
     JLabel instructionsLabel;
@@ -21,6 +22,8 @@ public class SnakeMenu extends JPanel implements ComponentListener {
 
     public SnakeMenu(UIDataHandler dataHandler) {
         this.dataHandler = dataHandler;
+        this.dataHandler.addInputListener(this);
+
         addComponentListener(this);
         setLayout(null);
 
@@ -120,6 +123,36 @@ public class SnakeMenu extends JPanel implements ComponentListener {
 
     @Override
     public void componentHidden(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void updateCanvas(Point[] foodPositions, Point[] snakeBody) {
+
+    }
+
+    @Override
+    public void updateScore(int score) {
+        scoreLabel.setText("Score: " + score);
+    }
+
+    @Override
+    public void updateHighScore(int highScore) {
+        topScoreLabel.setText("High Score: " + highScore);
+    }
+
+    @Override
+    public void onPlay() {
+
+    }
+
+    @Override
+    public void onEnd() {
+
+    }
+
+    @Override
+    public void updateSize(int width, int height) {
 
     }
 }

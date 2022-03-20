@@ -26,7 +26,7 @@ public class SnakeViewer extends JPanel implements ComponentListener {
 
         // create game canvas
         canvas = new SnakeCanvas(dataHandler);
-        canvas.setBackground(Color.CYAN);
+        canvas.setBackground(Color.DARK_GRAY);
         add(canvas);
 
         // create score bar
@@ -38,18 +38,23 @@ public class SnakeViewer extends JPanel implements ComponentListener {
     }
 
     private void resizeComponents() {
-        int scoreBarHeight = (int) (getHeight() * 0.1);
+
+        Insets insets = getInsets();
+        int currentWidth = getWidth() - insets.left - insets.right;
+        int currentHeight = getHeight() - insets.top - insets.bottom;
+
+        int scoreBarHeight = (int) (currentHeight * 0.1);
 
         // set score bar bounds
         if(scoreBar != null) scoreBar.setBounds(
-                0, 0,
-                getWidth(), scoreBarHeight
+                insets.left, insets.top,
+                currentWidth, scoreBarHeight
         );
 
         // set canvas bounds
         if(canvas != null) canvas.setBounds(
-                0, scoreBarHeight,
-                getWidth(), getHeight() - scoreBarHeight
+                insets.left, insets.top + scoreBarHeight,
+                currentWidth, currentHeight - scoreBarHeight
         );
     }
 

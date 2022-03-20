@@ -53,4 +53,11 @@ public class UIDataHandler implements UIDataListener {
             listener.onEnd();
         }
     }
+
+    @Override
+    public void updateSize(int width, int height) {
+        for(UIDataListener listener : listeners) {
+            listener.updateSize(width, height);
+        }
+    }
 }
