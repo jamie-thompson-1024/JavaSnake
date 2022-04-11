@@ -2,7 +2,7 @@ package com.snake.game;
 
 import org.junit.*;
 
-import java.awt.*;
+import com.snake.util.Point;
 
 public class SnakeGameMoveTests {
 

@@ -1,6 +1,6 @@
 package com.snake.ui.data;
 
-import java.awt.*;
+import com.snake.util.Point;
 
 public interface UIDataListener {
     void updateCanvas(Point[] foodPositions, Point[] snakeBody);

@@ -5,6 +5,7 @@ import com.snake.ui.SnakeUI;
 import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.input.InputDirection;
 import com.snake.ui.input.InputListener;
+import javafx.application.Application;
 
 public class Controller implements InputListener {
 
@@ -22,6 +23,7 @@ public class Controller implements InputListener {
     }
 
     public Controller run() {
+        Application.launch(this.ui.getClass());
         return this;
     }
 

@@ -1,6 +1,7 @@
 package com.snake.game;
 
-import java.awt.Point;
+import com.snake.util.Point;
+
 import java.util.List;
 import java.util.ArrayList;
 

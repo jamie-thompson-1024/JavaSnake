@@ -2,7 +2,8 @@ package com.snake.ui.data;
 
 import com.snake.ui.input.InputListener;
 
-import java.awt.*;
+import com.snake.util.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 
