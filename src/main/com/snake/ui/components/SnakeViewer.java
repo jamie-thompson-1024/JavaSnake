@@ -31,7 +31,8 @@ public class SnakeViewer extends JPanel implements ComponentListener {
 
         // create score bar
         scoreBar = new SnakeScoreBar(dataHandler);
-        scoreBar.setBackground(Color.GREEN);
+        scoreBar.setBackground(Color.DARK_GRAY);
+        scoreBar.setForeground(Color.LIGHT_GRAY);
         add(scoreBar);
 
         resizeComponents();

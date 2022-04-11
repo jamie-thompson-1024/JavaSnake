@@ -29,10 +29,13 @@ public class SnakeScoreBar extends JPanel implements ComponentListener, UIDataLi
 
         // create score label
         scoreLabel = new JLabel("Score: 0");
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(scoreLabel);
 
         // create top score label
         topScoreLabel = new JLabel("High score: 0");
+        topScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        topScoreLabel.setForeground(getForeground());
         add(topScoreLabel);
 
         resizeComponents();
@@ -41,16 +44,22 @@ public class SnakeScoreBar extends JPanel implements ComponentListener, UIDataLi
     private void resizeComponents() {
 
         // set score label bounds
-        if(scoreLabel != null) scoreLabel.setBounds(
+        if(scoreLabel != null) {
+            scoreLabel.setBounds(
                 0, 0,
                 getWidth() / 2, getHeight()
-        );
+            );
+            scoreLabel.setForeground(getForeground());
+        }
 
         // set top score label bounds
-        if(topScoreLabel != null) topScoreLabel.setBounds(
+        if(topScoreLabel != null) {
+            topScoreLabel.setBounds(
                 getWidth() / 2, 0,
                 getWidth() / 2, getHeight()
-        );
+            );
+            topScoreLabel.setForeground(getForeground());
+        }
     }
 
     @Override

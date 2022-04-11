@@ -5,10 +5,12 @@ import com.snake.ui.data.UIDataListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-public class SnakeMenu extends JPanel implements ComponentListener, UIDataListener {
+public class SnakeMenu extends JPanel implements ComponentListener, UIDataListener, ActionListener {
 
     JLabel titleLabel;
     JLabel instructionsLabel;
@@ -79,6 +81,8 @@ public class SnakeMenu extends JPanel implements ComponentListener, UIDataListen
 
         // create play button
         playButton = new JButton("Play");
+        playButton.setActionCommand("play");
+        playButton.addActionListener(this);
         gridConstraints.weighty = 0.2;
         gridConstraints.gridx = 1;
         gridConstraints.gridy = 2;
@@ -94,14 +98,21 @@ public class SnakeMenu extends JPanel implements ComponentListener, UIDataListen
     }
 
     private void resizeDialog() {
-        int dialogWidth = getWidth() / 2;
-        int dialogHeight = getHeight() / 2;
+
+        Insets insets = getInsets();
+        int currentWidth = getWidth() - insets.right - insets.left;
+        int currentHeight = getHeight() - insets.top - insets.bottom;
+        int currentX = insets.left;
+        int currentY = insets.top;
+
+        int dialogWidth = currentWidth / 2;
+        int dialogHeight = currentHeight / 2;
 
         int dialogX = dialogWidth / 2;
         int dialogY = dialogHeight / 2;
 
         dialogPanel.setBounds(
-                dialogX, dialogY,
+                currentX + dialogX, currentY + dialogY,
                 dialogWidth, dialogHeight
         );
     }
@@ -154,5 +165,18 @@ public class SnakeMenu extends JPanel implements ComponentListener, UIDataListen
     @Override
     public void updateSize(int width, int height) {
 
+    }
+
+    private void startGame() {
+        dataHandler.onPlay();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        switch(e.getActionCommand()) {
+            case "play":
+                startGame();
+                break;
+        }
     }
 }

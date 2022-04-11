@@ -3,6 +3,7 @@ package com.snake.ui;
 import com.snake.ui.components.SnakeMenu;
 import com.snake.ui.components.SnakeViewer;
 import com.snake.ui.data.UIDataHandler;
+import com.snake.ui.data.UIDataListener;
 import com.snake.ui.input.InputHandler;
 
 import javax.swing.*;
@@ -10,9 +11,9 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
-public class SnakeUI extends JFrame implements ComponentListener {
+public class SnakeUI extends JFrame implements ComponentListener, UIDataListener {
 
-    private boolean inMenu = false;
+    private boolean inMenu = true;
 
     private final InputHandler inputHandler = new InputHandler();
     private final UIDataHandler dataHandler = new UIDataHandler();
@@ -40,6 +41,7 @@ public class SnakeUI extends JFrame implements ComponentListener {
         setVisible(true);
 
         addKeyListener(inputHandler);
+        dataHandler.addInputListener(this);
     }
 
     public InputHandler getInputHandler() {
@@ -52,13 +54,14 @@ public class SnakeUI extends JFrame implements ComponentListener {
 
         // Create menu panel
         menu = new SnakeMenu(dataHandler);
-        menu.setBackground(new Color(33,33,33,33));
+        menu.setBackground(new Color(22,22,22,44));
         menu.setDialogBackground(new Color(33,33,33));
         menu.setVisible(inMenu);
-        cPane.add(menu);
 
         // Create game panel
         game = new SnakeViewer(dataHandler);
+
+        cPane.add(menu);
         cPane.add(game);
 
         resizeComponents();
@@ -99,6 +102,36 @@ public class SnakeUI extends JFrame implements ComponentListener {
 
     @Override
     public void componentHidden(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void updateCanvas(Point[] foodPositions, Point[] snakeBody) {
+
+    }
+
+    @Override
+    public void updateScore(int score) {
+
+    }
+
+    @Override
+    public void updateHighScore(int highScore) {
+
+    }
+
+    @Override
+    public void onPlay() {
+        setInMenu(false);
+    }
+
+    @Override
+    public void onEnd() {
+        setInMenu(true);
+    }
+
+    @Override
+    public void updateSize(int width, int height) {
 
     }
 }
