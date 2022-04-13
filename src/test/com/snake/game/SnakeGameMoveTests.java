@@ -1,6 +1,9 @@
 package com.snake.game;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.snake.util.Point;
 
@@ -8,42 +11,42 @@ public class SnakeGameMoveTests {
 
     SnakeGame game;
 
-    @Before
+    @BeforeEach
     public void initialise() {
         game = new SnakeGame();
     }
 
     @Test
     public void on_FirstMove_With_DirectionNone_Expect_Move_ToReturn_False() {
-        Assert.assertFalse(
+        assertFalse(
                 game.move(Direction.NONE)
         );
     }
 
     @Test
     public void on_FirstMove_With_DirectionUp_Expect_Move_ToReturn_True() {
-        Assert.assertTrue(
+        assertTrue(
                 game.move(Direction.UP)
         );
     }
 
     @Test
     public void on_FirstMove_With_DirectionLeft_Expect_Move_ToReturn_True() {
-        Assert.assertTrue(
+        assertTrue(
                 game.move(Direction.LEFT)
         );
     }
 
     @Test
     public void on_FirstMove_With_DirectionDown_Expect_Move_ToReturn_True() {
-        Assert.assertTrue(
+        assertTrue(
                 game.move(Direction.DOWN)
         );
     }
 
     @Test
     public void on_FirstMove_With_DirectionRight_Expect_Move_ToReturn_True() {
-        Assert.assertTrue(
+        assertTrue(
                 game.move(Direction.RIGHT)
         );
     }
@@ -51,7 +54,7 @@ public class SnakeGameMoveTests {
     @Test
     public void on_GameStateStopped_Expect_Move_ToReturn_False() {
         game.setHeight(10);
-        Assert.assertFalse(
+        assertFalse(
                 game.move(Direction.UP)
         );
     }
@@ -59,7 +62,7 @@ public class SnakeGameMoveTests {
     @Test
     public void after_FirstMove_Expect_Age_ToBe_1() {
         game.move(Direction.UP);
-        Assert.assertEquals(
+        assertEquals(
                 1,
                 game.getTime()
         );
@@ -70,7 +73,7 @@ public class SnakeGameMoveTests {
         Point oldHead = game.getSnakeBody()[0];
         game.move(Direction.UP);
         Point newHead = game.getSnakeBody()[0];
-        Assert.assertTrue(
+        assertTrue(
                 oldHead.x == newHead.x &&
                         oldHead.y - 1 == newHead.y
         );
@@ -81,7 +84,7 @@ public class SnakeGameMoveTests {
         Point oldHead = game.getSnakeBody()[0];
         game.move(Direction.RIGHT);
         Point newHead = game.getSnakeBody()[0];
-        Assert.assertTrue(
+        assertTrue(
                 oldHead.x + 1 == newHead.x &&
                         oldHead.y == newHead.y
         );
@@ -92,7 +95,7 @@ public class SnakeGameMoveTests {
         Point oldHead = game.getSnakeBody()[0];
         game.move(Direction.DOWN);
         Point newHead = game.getSnakeBody()[0];
-        Assert.assertTrue(
+        assertTrue(
                 oldHead.x == newHead.x &&
                         oldHead.y + 1 == newHead.y
         );
@@ -103,7 +106,7 @@ public class SnakeGameMoveTests {
         Point oldHead = game.getSnakeBody()[0];
         game.move(Direction.LEFT);
         Point newHead = game.getSnakeBody()[0];
-        Assert.assertTrue(
+        assertTrue(
                 oldHead.x - 1 == newHead.x &&
                         oldHead.y == newHead.y
         );
@@ -117,7 +120,7 @@ public class SnakeGameMoveTests {
         game.resetGame();
 
         game.move(Direction.UP);
-        Assert.assertEquals(
+        assertEquals(
                 2,
                 game.getSnakeBody().length
         );
@@ -131,7 +134,7 @@ public class SnakeGameMoveTests {
         game.resetGame();
 
         game.move(Direction.UP);
-        Assert.assertEquals(
+        assertEquals(
                 1,
                 game.getScore()
         );
@@ -144,7 +147,7 @@ public class SnakeGameMoveTests {
         game.resetGame();
 
         game.move(Direction.UP);
-        Assert.assertFalse(
+        assertFalse(
                 game.move(Direction.UP)
         );
     }
@@ -157,7 +160,7 @@ public class SnakeGameMoveTests {
 
         game.move(Direction.UP);
         game.move(Direction.UP);
-        Assert.assertFalse(
+        assertFalse(
                 game.move(Direction.UP)
         );
     }
@@ -170,7 +173,7 @@ public class SnakeGameMoveTests {
 
         game.move(Direction.UP);
         game.move(Direction.UP);
-        Assert.assertEquals(
+        assertEquals(
                 GameState.WALL_COLLISION,
                 game.getGameState()
         );
@@ -187,7 +190,7 @@ public class SnakeGameMoveTests {
         game.move(Direction.LEFT);
         game.move(Direction.DOWN);
 
-        Assert.assertFalse(
+        assertFalse(
                 game.move(Direction.RIGHT)
         );
     }
@@ -204,7 +207,7 @@ public class SnakeGameMoveTests {
         game.move(Direction.DOWN);
         game.move(Direction.RIGHT);
 
-        Assert.assertFalse(
+        assertFalse(
                 game.move(Direction.RIGHT)
         );
     }
@@ -221,7 +224,7 @@ public class SnakeGameMoveTests {
         game.move(Direction.DOWN);
         game.move(Direction.RIGHT);
 
-        Assert.assertEquals(
+        assertEquals(
                 GameState.SELF_COLLISION,
                 game.getGameState()
         );

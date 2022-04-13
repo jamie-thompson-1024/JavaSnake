@@ -1,15 +1,13 @@
 package com.snake.ui;
 
+import com.snake.ui.components.GameScene;
+import com.snake.ui.components.MenuScene;
 import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.data.UIDataListener;
 import com.snake.ui.input.InputHandler;
 
 import com.snake.util.Point;
 import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SnakeUI extends Application implements UIDataListener {
@@ -19,21 +17,45 @@ public class SnakeUI extends Application implements UIDataListener {
     private final InputHandler inputHandler = new InputHandler();
     private final UIDataHandler dataHandler = new UIDataHandler();
 
-    public SnakeUI() {
+    private GameScene gameScene;
+    private MenuScene menuScene;
 
+    private Stage stage;
+
+    public SnakeUI() {
         dataHandler.addInputListener(this);
+    }
+
+    public void run() {
+        launch();
+    }
+
+    @Override
+    public void init() {
+
     }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Text text = new Text(10, 40, "Hello World!");
-        text.setFont(new Font(40));
-        Scene scene = new Scene(new Group(text));
 
-        stage.setTitle("Welcome to JavaFX!");
-        stage.setScene(scene);
-        stage.sizeToScene();
-        stage.show();
+        menuScene = new MenuScene();
+        gameScene = new GameScene();
+
+        dataHandler.addInputListener(menuScene);
+        dataHandler.addInputListener(gameScene);
+
+        gameScene.setOnKeyPressed(inputHandler);
+
+        this.stage = stage;
+        this.stage.setTitle("Java Snake");
+        this.stage.setScene(inMenu ? menuScene : gameScene);
+        this.stage.sizeToScene();
+        this.stage.show();
+    }
+
+    @Override
+    public void stop() {
+
     }
 
     public InputHandler getInputHandler() {
@@ -45,6 +67,9 @@ public class SnakeUI extends Application implements UIDataListener {
 
     public void setInMenu(boolean inMenu) {
         this.inMenu = inMenu;
+
+        stage.setScene(inMenu ? menuScene : gameScene);
+        stage.sizeToScene();
     }
 
     @Override
@@ -76,4 +101,5 @@ public class SnakeUI extends Application implements UIDataListener {
     public void updateSize(int width, int height) {
 
     }
+
 }

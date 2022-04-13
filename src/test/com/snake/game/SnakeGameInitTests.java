@@ -1,19 +1,20 @@
 package com.snake.game;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SnakeGameInitTests {
 
     SnakeGame game;
 
-    @Before
+    @BeforeEach
     public void initialiseGame() {
         game = new SnakeGame();
     }
 
     @Test
     public void expect_GameState_ToBe_Ready() {
-        Assert.assertEquals(
+        assertEquals(
                 GameState.READY,
                 game.getGameState()
         );
@@ -21,7 +22,7 @@ public class SnakeGameInitTests {
 
     @Test
     public void expect_Score_ToBe_0() {
-        Assert.assertEquals(
+        assertEquals(
                 0,
                 game.getScore()
         );
@@ -29,7 +30,7 @@ public class SnakeGameInitTests {
 
     @Test
     public void expect_Time_ToBe_0() {
-        Assert.assertEquals(
+        assertEquals(
                 0,
                 game.getTime()
         );
@@ -37,7 +38,7 @@ public class SnakeGameInitTests {
 
     @Test
     public void expect_LastDirection_ToBe_None() {
-        Assert.assertEquals(
+        assertEquals(
                 Direction.NONE,
                 game.getLastDirection()
         );
@@ -45,7 +46,7 @@ public class SnakeGameInitTests {
 
     @Test
     public void expect_SnakeBody_ToBe_LengthOf1() {
-        Assert.assertEquals(
+        assertEquals(
                 1,
                 game.getSnakeBody().length
         );
@@ -53,7 +54,7 @@ public class SnakeGameInitTests {
 
     @Test
     public void expect_FoodPositions_ToBe_LengthOfFoodCount() {
-        Assert.assertEquals(
+        assertEquals(
                 game.getFoodCount(),
                 game.getFoodPositions().length
         );

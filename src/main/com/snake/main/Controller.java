@@ -23,7 +23,7 @@ public class Controller implements InputListener {
     }
 
     public Controller run() {
-        Application.launch(this.ui.getClass());
+        this.ui.run();
         return this;
     }
 
