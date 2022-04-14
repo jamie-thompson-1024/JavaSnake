@@ -5,5 +5,5 @@ module com.snake {
     requires java.desktop;
     requires org.junit.jupiter.api;
 
-    exports com.snake.ui;
+    exports com.snake.main;
 }

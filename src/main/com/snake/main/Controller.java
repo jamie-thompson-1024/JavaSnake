@@ -6,25 +6,39 @@ import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.input.InputDirection;
 import com.snake.ui.input.InputListener;
 import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Controller implements InputListener {
+public class Controller extends Application implements InputListener {
 
-    private final SnakeGame game;
-    private final SnakeUI ui;
+    private SnakeGame game;
+    private SnakeUI ui;
 
-    private final UIDataHandler dataHandler;
+    private UIDataHandler dataHandler;
 
-    public Controller(SnakeGame game, SnakeUI ui) {
-        this.game = game;
-        this.ui = ui;
+    public Controller() {
+        super();
+    }
+
+    public static void main(String[] argv) {
+        System.out.println("Hello");
+
+        Controller.launch(argv);
+    }
+
+    @Override
+    public void start(Stage stage) {
+        this.game = new SnakeGame();
+        this.ui = new SnakeUI(stage);
 
         dataHandler = this.ui.getDataHandler();
         this.ui.getInputHandler().addInputListener(this);
+
+        setup();
     }
 
-    public Controller run() {
-        this.ui.run();
-        return this;
+    public void setup() {
+        dataHandler.updateScore(0);
+        dataHandler.updateHighScore(0);
     }
 
     @Override

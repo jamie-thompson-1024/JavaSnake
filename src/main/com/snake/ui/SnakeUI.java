@@ -1,5 +1,6 @@
 package com.snake.ui;
 
+import com.snake.main.Controller;
 import com.snake.ui.components.GameScene;
 import com.snake.ui.components.MenuScene;
 import com.snake.ui.data.UIDataHandler;
@@ -10,7 +11,7 @@ import com.snake.util.Point;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class SnakeUI extends Application implements UIDataListener {
+public class SnakeUI implements UIDataListener {
 
     private boolean inMenu = true;
 
@@ -22,21 +23,8 @@ public class SnakeUI extends Application implements UIDataListener {
 
     private Stage stage;
 
-    public SnakeUI() {
+    public SnakeUI(Stage stage) {
         dataHandler.addInputListener(this);
-    }
-
-    public void run() {
-        launch();
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
 
         menuScene = new MenuScene();
         gameScene = new GameScene();
@@ -51,11 +39,6 @@ public class SnakeUI extends Application implements UIDataListener {
         this.stage.setScene(inMenu ? menuScene : gameScene);
         this.stage.sizeToScene();
         this.stage.show();
-    }
-
-    @Override
-    public void stop() {
-
     }
 
     public InputHandler getInputHandler() {
