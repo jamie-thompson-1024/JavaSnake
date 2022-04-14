@@ -1,8 +1,12 @@
 package com.snake.ui.components;
 
+import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.data.UIDataListener;
 import com.snake.util.Point;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,8 +23,12 @@ public class MenuScene extends Scene implements UIDataListener {
     private Label lastScoreLabel;
     private Button playButton;
 
-    public MenuScene() {
+    private UIDataHandler uiDataHandler;
+
+    public MenuScene(UIDataHandler uiDataHandler) {
         super(new GridPane());
+
+        this.uiDataHandler = uiDataHandler;
 
         createComponents();
         attachComponents();
@@ -40,6 +48,7 @@ public class MenuScene extends Scene implements UIDataListener {
         lastScoreLabel = new Label("Last Score: ");
 
         playButton = new Button("Play");
+        playButton.setOnAction(arg0 -> uiDataHandler.onPlay());
     }
 
     public void attachComponents() {
@@ -47,7 +56,7 @@ public class MenuScene extends Scene implements UIDataListener {
 
         /*
             |   titleLabel              |
-            |   isntructionsLabel       |
+            |   instructionsLabel       |
             |   sizeSliderLabel         |
             |   sizeSlider              |
             |   highScore   |   Play    |

@@ -8,7 +8,6 @@ import com.snake.ui.data.UIDataListener;
 import com.snake.ui.input.InputHandler;
 
 import com.snake.util.Point;
-import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class SnakeUI implements UIDataListener {
@@ -26,7 +25,7 @@ public class SnakeUI implements UIDataListener {
     public SnakeUI(Stage stage) {
         dataHandler.addInputListener(this);
 
-        menuScene = new MenuScene();
+        menuScene = new MenuScene(dataHandler);
         gameScene = new GameScene();
 
         dataHandler.addInputListener(menuScene);
