@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.stage.Screen?>
+<?import java.lang.String?>
+
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen" />
+    </fx:define>
+
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="50"/>
+        <ColumnConstraints percentWidth="50"/>
+    </columnConstraints>
+
+    <children>
+        <Label
+                fx:id="scoreLabel"
+                text="Score: ~"
+                GridPane.rowIndex="0" GridPane.rowSpan="1"
+                GridPane.columnIndex="0" GridPane.columnSpan="1"/>
+        <Label
+                fx:id="highScoreLabel"
+                text="High Score: ~"
+                GridPane.rowIndex="0" GridPane.rowSpan="1"
+                GridPane.columnIndex="1" GridPane.columnSpan="1"/>
+        <Canvas
+                fx:id="gameCanvas"
+                width="500" height="500"
+                GridPane.rowIndex="1" GridPane.rowSpan="1"
+                GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    </children>
+</GridPane>

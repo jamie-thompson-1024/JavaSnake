@@ -1,0 +1,9 @@
+
+.title {
+    -fx-font-size: 35px;
+}
+
+.instructions {
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}

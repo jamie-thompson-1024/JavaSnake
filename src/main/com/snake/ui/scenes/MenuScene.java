@@ -1,9 +1,11 @@
-package com.snake.ui.components;
+package com.snake.ui.scenes;
 
 import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.data.UIDataListener;
 import com.snake.util.Point;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +26,7 @@ public class MenuScene implements UIDataListener {
 
     public MenuScene(UIDataHandler uiDataHandler) {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("MenuScene.fxml"));
+        loader.setLocation(getClass().getResource("fxml/MenuScene.fxml"));
 
         try {
             scene = new Scene(loader.load());
@@ -33,6 +35,11 @@ public class MenuScene implements UIDataListener {
             System.exit(1);
         }
 
+        scene.getStylesheets().add(
+                getClass().getResource("style/MenuScene.css").toExternalForm());
+        scene.getStylesheets().add(
+                getClass().getResource("style/Global.css").toExternalForm());
+
         gameSizeSliderLabel = (Label) scene.lookup("#gameSizeSliderLabel");
         gameSizeSlider = (Slider) scene.lookup("#gameSizeSlider");
         highScoreLabel = (Label) scene.lookup("#highScoreLabel");
@@ -40,6 +47,8 @@ public class MenuScene implements UIDataListener {
         playButton = (Button) scene.lookup("#playButton");
 
         this.uiDataHandler = uiDataHandler;
+
+        playButton.setOnAction((e) -> this.uiDataHandler.onPlay());
     }
 
     public Scene getScene() {
@@ -73,6 +82,6 @@ public class MenuScene implements UIDataListener {
 
     @Override
     public void updateSize(int width, int height) {
-
+        gameSizeSliderLabel.setText("Game Size: " + width);
     }
 }

@@ -1,7 +1,7 @@
 package com.snake.ui;
 
-import com.snake.ui.components.GameScene;
-import com.snake.ui.components.MenuScene;
+import com.snake.ui.scenes.GameScene;
+import com.snake.ui.scenes.MenuScene;
 import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.data.UIDataListener;
 import com.snake.ui.input.InputHandler;
@@ -51,6 +51,9 @@ public class SnakeUI implements UIDataListener {
 
         stage.setScene(inMenu ? menuScene.getScene() : gameScene.getScene());
         stage.sizeToScene();
+
+        if(!this.inMenu)
+            gameScene.drawGame();
     }
 
     @Override

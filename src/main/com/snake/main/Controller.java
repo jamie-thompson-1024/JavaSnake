@@ -41,7 +41,12 @@ public class Controller extends Application implements InputListener, UIDataList
     }
 
     public void setup() {
+        game.resetGame();
 
+        dataHandler.updateHighScore(0);
+        dataHandler.updateScore(0);
+        dataHandler.updateSize(game.getWidth(), game.getHeight());
+        dataHandler.updateCanvas(game.getFoodPositions(), game.getSnakeBody());
     }
 
     @Override
