@@ -4,72 +4,46 @@ import com.snake.ui.data.UIDataHandler;
 import com.snake.ui.data.UIDataListener;
 import com.snake.util.Point;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.GridPane;
 
-public class MenuScene extends Scene implements UIDataListener {
+public class MenuScene implements UIDataListener {
 
-    private Label titleLabel;
-    private Label instructionsLabel;
-    private Label sizeSliderLabel;
-    private Slider sizeSlider;
-    private Label highScoreLabel;
-    private Label lastScoreLabel;
-    private Button playButton;
+    private final Label gameSizeSliderLabel;
+    private final Slider gameSizeSlider;
+    private final Label highScoreLabel;
+    private final Label lastScoreLabel;
+    private final Button playButton;
+
+    private Scene scene;
 
     private UIDataHandler uiDataHandler;
 
     public MenuScene(UIDataHandler uiDataHandler) {
-        super(new GridPane());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("MenuScene.fxml"));
+
+        try {
+            scene = new Scene(loader.load());
+        } catch(Exception e) {
+            System.out.println(e);
+            System.exit(1);
+        }
+
+        gameSizeSliderLabel = (Label) scene.lookup("#gameSizeSliderLabel");
+        gameSizeSlider = (Slider) scene.lookup("#gameSizeSlider");
+        highScoreLabel = (Label) scene.lookup("#highScoreLabel");
+        lastScoreLabel = (Label) scene.lookup("#lastScoreLabel");
+        playButton = (Button) scene.lookup("#playButton");
 
         this.uiDataHandler = uiDataHandler;
-
-        createComponents();
-        attachComponents();
     }
 
-    private void createComponents() {
-        titleLabel = new Label("Snake Game");
-
-        instructionsLabel = new Label(" ~ ~ ~ Instructions ~ ~ ~ ");
-
-        sizeSliderLabel = new Label();
-
-        sizeSlider = new Slider();
-
-        highScoreLabel = new Label("High Score: ");
-
-        lastScoreLabel = new Label("Last Score: ");
-
-        playButton = new Button("Play");
-        playButton.setOnAction(arg0 -> uiDataHandler.onPlay());
-    }
-
-    public void attachComponents() {
-        GridPane root = (GridPane)getRoot();
-
-        /*
-            |   titleLabel              |
-            |   instructionsLabel       |
-            |   sizeSliderLabel         |
-            |   sizeSlider              |
-            |   highScore   |   Play    |
-            |   lastScore   |   Play    |
-        */
-
-        root.add(titleLabel, 0, 0, 2, 1);
-        root.add(instructionsLabel, 0, 1, 2, 1);
-        root.add(sizeSliderLabel, 0, 2, 2, 1);
-        root.add(sizeSlider, 0, 3, 2, 1);
-        root.add(highScoreLabel, 0, 4, 1, 1);
-        root.add(lastScoreLabel, 0, 5, 1, 1);
-        root.add(playButton, 1, 4, 1, 2);
+    public Scene getScene() {
+        return scene;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.snake.ui;
 
-import com.snake.main.Controller;
 import com.snake.ui.components.GameScene;
 import com.snake.ui.components.MenuScene;
 import com.snake.ui.data.UIDataHandler;
@@ -31,13 +30,13 @@ public class SnakeUI implements UIDataListener {
         dataHandler.addInputListener(menuScene);
         dataHandler.addInputListener(gameScene);
 
-        gameScene.setOnKeyPressed(inputHandler);
+        gameScene.getScene().setOnKeyPressed(inputHandler);
 
         this.stage = stage;
         this.stage.setTitle("Java Snake");
-        this.stage.setScene(inMenu ? menuScene : gameScene);
-        this.stage.sizeToScene();
+        setInMenu(true);
         this.stage.show();
+
     }
 
     public InputHandler getInputHandler() {
@@ -50,7 +49,7 @@ public class SnakeUI implements UIDataListener {
     public void setInMenu(boolean inMenu) {
         this.inMenu = inMenu;
 
-        stage.setScene(inMenu ? menuScene : gameScene);
+        stage.setScene(inMenu ? menuScene.getScene() : gameScene.getScene());
         stage.sizeToScene();
     }
 

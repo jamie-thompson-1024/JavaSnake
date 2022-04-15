@@ -3,44 +3,37 @@ package com.snake.ui.components;
 import com.snake.ui.data.UIDataListener;
 import com.snake.util.Point;
 
-import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 
-public class GameScene extends Scene implements UIDataListener {
+public class GameScene implements UIDataListener {
 
     private Label scoreLabel;
     private Label topScoreLabel;
     private Canvas gameCanvas;
 
+    private Scene scene;
+
     public GameScene() {
-        super(new GridPane());
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("GameScene.fxml"));
 
-        createComponents();
-        attachComponents();
+        try {
+            scene = new Scene(loader.load());
+        } catch(Exception e) {
+            System.out.println(e);
+            System.exit(1);
+        }
+
+        scoreLabel = (Label) scene.lookup("#scoreLabel");
+        topScoreLabel = (Label) scene.lookup("#highScoreLabel");
+        gameCanvas = (Canvas) scene.lookup("#gameCanvas");
     }
 
-    private void createComponents() {
-        scoreLabel = new Label("Score: ");
-
-        topScoreLabel = new Label("High Score: ");
-
-        gameCanvas = new Canvas();
-    }
-
-    public void attachComponents() {
-        GridPane root = (GridPane)getRoot();
-
-        /*
-            |   scoreLabel  |   topScoreLabel   |
-            |           gameCanvas              |
-         */
-
-        root.add(scoreLabel, 0, 0, 1, 1);
-        root.add(topScoreLabel, 1, 0, 1, 1);
-        root.add(gameCanvas, 0, 1, 2, 1);
+    public Scene getScene() {
+        return scene;
     }
 
     @Override
