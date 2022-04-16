@@ -1,5 +1,7 @@
 package com.snake.main;
 
+import com.snake.game.Direction;
+import com.snake.game.GameState;
 import com.snake.game.SnakeGame;
 import com.snake.ui.SnakeUI;
 import com.snake.ui.data.UIDataHandler;
@@ -15,6 +17,8 @@ public class Controller extends Application implements InputListener, UIDataList
 
     private SnakeGame game;
     private SnakeUI ui;
+
+    private int highScore = 0;
 
     private UIDataHandler dataHandler;
 
@@ -43,15 +47,40 @@ public class Controller extends Application implements InputListener, UIDataList
     public void setup() {
         game.resetGame();
 
-        dataHandler.updateHighScore(0);
+        dataHandler.updateHighScore(highScore);
         dataHandler.updateScore(0);
         dataHandler.updateSize(game.getWidth(), game.getHeight());
         dataHandler.updateCanvas(game.getFoodPositions(), game.getSnakeBody());
     }
 
+    public void move(Direction direction) {
+        if (game.move(direction)) {
+            dataHandler.updateCanvas(game.getFoodPositions(), game.getSnakeBody());
+            dataHandler.updateScore(game.getScore());
+            if(game.getScore() > highScore)
+                highScore = game.getScore();
+        } else {
+            dataHandler.onEnd();
+        }
+    }
+
     @Override
     public void directionInput(InputDirection direction) {
+        Direction gameDirection = switch (direction) {
+            case UP -> Direction.UP;
+            case DOWN -> Direction.DOWN;
+            case LEFT -> Direction.LEFT;
+            case RIGHT -> Direction.RIGHT;
+        };
 
+        switch (game.getGameState()) {
+            case READY:
+                move(gameDirection);
+                break;
+            case PLAYING:
+                move(gameDirection);
+                break;
+        }
     }
 
     @Override
@@ -71,7 +100,7 @@ public class Controller extends Application implements InputListener, UIDataList
 
     @Override
     public void onPlay() {
-
+        game.resetGame();
     }
 
     @Override
@@ -81,6 +110,7 @@ public class Controller extends Application implements InputListener, UIDataList
 
     @Override
     public void updateSize(int width, int height) {
-
+        game.setWidth(width);
+        game.setHeight(height);
     }
 }

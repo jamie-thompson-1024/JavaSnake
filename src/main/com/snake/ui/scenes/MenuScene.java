@@ -49,6 +49,8 @@ public class MenuScene implements UIDataListener {
         this.uiDataHandler = uiDataHandler;
 
         playButton.setOnAction((e) -> this.uiDataHandler.onPlay());
+        gameSizeSlider.valueProperty().addListener((o, oldVal, newVal) ->
+                this.uiDataHandler.updateSize((int)Math.round((double)newVal), (int)Math.round((double)newVal)));
     }
 
     public Scene getScene() {
@@ -83,5 +85,6 @@ public class MenuScene implements UIDataListener {
     @Override
     public void updateSize(int width, int height) {
         gameSizeSliderLabel.setText("Game Size: " + width);
+        gameSizeSlider.setValue(width);
     }
 }

@@ -8,8 +8,7 @@
 <?import javafx.stage.Screen?>
 <GridPane
             xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="500" prefWidth="500">
+            xmlns:fx="http://javafx.com/fxml">
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen" />
     </fx:define>
@@ -31,6 +30,7 @@
         <Label
                 text="Snake is a simple game in which you must collect food items for as long as possible without colliding with yourself or a wall"
                 styleClass="instructions"
+                prefWidth="250"
                 GridPane.rowIndex="1" GridPane.rowSpan="1"
                 GridPane.columnIndex="0" GridPane.columnSpan="2"/>
         <Label
@@ -40,6 +40,9 @@
                 GridPane.columnIndex="0" GridPane.columnSpan="2"/>
         <Slider
                 fx:id="gameSizeSlider"
+                min="5" max="50"
+                showTickMarks="true" majorTickUnit="5"
+                blockIncrement="1" value="10"
                 GridPane.rowIndex="3" GridPane.rowSpan="1"
                 GridPane.columnIndex="0" GridPane.columnSpan="2"/>
         <Label
