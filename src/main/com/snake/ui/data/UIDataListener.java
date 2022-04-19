@@ -1,6 +1,6 @@
 package com.snake.ui.data;
 
-import java.awt.*;
+import com.snake.util.Point;
 
 public interface UIDataListener {
     void updateCanvas(Point[] foodPositions, Point[] snakeBody);
@@ -9,4 +9,6 @@ public interface UIDataListener {
     void onPlay();
     void onEnd();
     void updateSize(int width, int height);
+    void updateTickDelay(int millis);
+    void updateFoodCount(int foodCount);
 }

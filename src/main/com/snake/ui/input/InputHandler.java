@@ -1,15 +1,18 @@
 package com.snake.ui.input;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class InputHandler implements KeyListener,InputListener {
+public class InputHandler implements EventHandler<KeyEvent>,InputListener {
 
     private final List<InputListener> listeners = new ArrayList<>();
 
-    public InputHandler() {}
+    public InputHandler() {
+        super();
+    }
 
     public void addInputListener(InputListener listener) {
         listeners.add(listener);
@@ -27,23 +30,13 @@ public class InputHandler implements KeyListener,InputListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_W, KeyEvent.VK_UP -> directionInput(InputDirection.UP);
-            case KeyEvent.VK_A, KeyEvent.VK_LEFT -> directionInput(InputDirection.LEFT);
-            case KeyEvent.VK_S, KeyEvent.VK_DOWN -> directionInput(InputDirection.DOWN);
-            case KeyEvent.VK_D, KeyEvent.VK_RIGHT -> directionInput(InputDirection.RIGHT);
+    public void handle(KeyEvent e) {
+        switch (e.getCode()) {
+            case W, UP -> directionInput(InputDirection.UP);
+            case A, LEFT -> directionInput(InputDirection.LEFT);
+            case S, DOWN -> directionInput(InputDirection.DOWN);
+            case D, RIGHT -> directionInput(InputDirection.RIGHT);
         }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
     }
 
 }

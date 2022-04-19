@@ -1,12 +1,13 @@
 package com.snake.game;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SnakeGameSetterTests {
 
     SnakeGame game;
 
-    @Before
+    @BeforeEach
     public void initialiseGame() {
         game = new SnakeGame();
     }
@@ -16,7 +17,7 @@ public class SnakeGameSetterTests {
         game.setWidth(
                 game.getWidth() + 10
         );
-        Assert.assertEquals(
+        assertEquals(
                 GameState.STOPPED,
                 game.getGameState()
         );
@@ -27,7 +28,7 @@ public class SnakeGameSetterTests {
         game.setHeight(
                 game.getHeight() + 10
         );
-        Assert.assertEquals(
+        assertEquals(
                 GameState.STOPPED,
                 game.getGameState()
         );
@@ -38,7 +39,7 @@ public class SnakeGameSetterTests {
         game.setFoodCount(
                 game.getFoodCount() + 5
         );
-        Assert.assertEquals(
+        assertEquals(
                 GameState.STOPPED,
                 game.getGameState()
         );
@@ -52,7 +53,7 @@ public class SnakeGameSetterTests {
         game.setFoodCount(
                 game.getFoodCount() + 5
         );
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 game.getFoodCount()
         );
@@ -66,7 +67,7 @@ public class SnakeGameSetterTests {
         game.setWidth(
                 game.getWidth() + 5
         );
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 game.getWidth()
         );
@@ -80,7 +81,7 @@ public class SnakeGameSetterTests {
         game.setHeight(
                 game.getHeight() + 5
         );
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 game.getHeight()
         );
@@ -92,7 +93,7 @@ public class SnakeGameSetterTests {
         game.setWidth(
                 expected
         );
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 game.getWidth()
         );
@@ -104,7 +105,7 @@ public class SnakeGameSetterTests {
         game.setHeight(
                 expected
         );
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 game.getHeight()
         );
@@ -116,7 +117,7 @@ public class SnakeGameSetterTests {
         game.setFoodCount(
                 expected
         );
-        Assert.assertEquals(
+        assertEquals(
                 expected,
                 game.getFoodCount()
         );

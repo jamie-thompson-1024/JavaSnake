@@ -1,0 +1,14 @@
+
+GridPane {
+    -fx-background-color: #444444;
+
+    -fx-vgap: 10px;
+    -fx-hgap: 10px;
+
+    -fx-padding: 10px;
+}
+
+Label {
+    -fx-text-fill: #FEFEFE;
+    -fx-font-size: 15px;
+}
