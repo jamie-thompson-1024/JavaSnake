@@ -17,19 +17,21 @@
     </rowConstraints>
 
     <columnConstraints>
-        <ColumnConstraints percentWidth="50" />
-        <ColumnConstraints percentWidth="50" />
+        <ColumnConstraints percentWidth="50" halignment="CENTER"/>
+        <ColumnConstraints percentWidth="50" halignment="CENTER"/>
     </columnConstraints>
 
     <children>
         <Label
                 text="Snake Game"
                 styleClass="title"
+                alignment="CENTER"
                 GridPane.rowIndex="0" GridPane.rowSpan="1"
                 GridPane.columnIndex="0" GridPane.columnSpan="2"/>
         <Label
                 text="Snake is a simple game in which you must collect food items for as long as possible without colliding with yourself or a wall"
                 styleClass="instructions"
+                textAlignment="CENTER"
                 prefWidth="250"
                 GridPane.rowIndex="1" GridPane.rowSpan="1"
                 GridPane.columnIndex="0" GridPane.columnSpan="2"/>
