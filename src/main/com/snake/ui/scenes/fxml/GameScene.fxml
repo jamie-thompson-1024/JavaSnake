@@ -13,13 +13,11 @@
     </fx:define>
 
     <rowConstraints>
-        <RowConstraints />
-        <RowConstraints />
     </rowConstraints>
 
     <columnConstraints>
-        <ColumnConstraints percentWidth="50"/>
-        <ColumnConstraints percentWidth="50"/>
+        <ColumnConstraints percentWidth="50" halignment="CENTER"/>
+        <ColumnConstraints percentWidth="50" halignment="CENTER"/>
     </columnConstraints>
 
     <children>
