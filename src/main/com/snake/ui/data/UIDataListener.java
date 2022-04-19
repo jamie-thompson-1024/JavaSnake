@@ -9,4 +9,6 @@ public interface UIDataListener {
     void onPlay();
     void onEnd();
     void updateSize(int width, int height);
+    void updateTickDelay(int millis);
+    void updateFoodCount(int foodCount);
 }

@@ -86,4 +86,14 @@ public class SnakeUI implements UIDataListener {
 
     }
 
+    @Override
+    public void updateTickDelay(int millis) {
+
+    }
+
+    @Override
+    public void updateFoodCount(int foodCount) {
+
+    }
+
 }

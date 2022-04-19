@@ -19,6 +19,8 @@ public class Controller extends Application implements InputListener, UIDataList
     private SnakeUI ui;
 
     private int highScore = 0;
+    private int timeDelay = 600;
+    private Direction direction;
 
     private UIDataHandler dataHandler;
 
@@ -51,17 +53,17 @@ public class Controller extends Application implements InputListener, UIDataList
         dataHandler.updateScore(0);
         dataHandler.updateSize(game.getWidth(), game.getHeight());
         dataHandler.updateCanvas(game.getFoodPositions(), game.getSnakeBody());
+        dataHandler.updateTickDelay(timeDelay);
+        dataHandler.updateFoodCount(game.getFoodCount());
     }
 
-    public void move(Direction direction) {
-        if (game.move(direction)) {
+    public boolean move(Direction direction) {
+            boolean out = game.move(direction);
             dataHandler.updateCanvas(game.getFoodPositions(), game.getSnakeBody());
             dataHandler.updateScore(game.getScore());
             if(game.getScore() > highScore)
                 highScore = game.getScore();
-        } else {
-            dataHandler.onEnd();
-        }
+            return out;
     }
 
     @Override
@@ -73,14 +75,32 @@ public class Controller extends Application implements InputListener, UIDataList
             case RIGHT -> Direction.RIGHT;
         };
 
-        switch (game.getGameState()) {
-            case READY:
-                move(gameDirection);
-                break;
-            case PLAYING:
-                move(gameDirection);
-                break;
+        this.direction = gameDirection;
+
+        if(game.getGameState() == GameState.READY) {
+            new Thread(() -> startLoop()).start();
         }
+    }
+
+    private long getMillis() {
+        return System.nanoTime() / 1000000;
+    }
+
+    private void startLoop() {
+        long lastTime = 0;
+
+        while(true) {
+            if(getMillis() - lastTime > timeDelay) {
+                if(!move(direction))
+                    break;
+
+                direction = Direction.NONE;
+                lastTime = getMillis();
+            }
+        }
+
+
+        dataHandler.onEnd();
     }
 
     @Override
@@ -112,5 +132,15 @@ public class Controller extends Application implements InputListener, UIDataList
     public void updateSize(int width, int height) {
         game.setWidth(width);
         game.setHeight(height);
+    }
+
+    @Override
+    public void updateTickDelay(int millis) {
+        timeDelay = millis;
+    }
+
+    @Override
+    public void updateFoodCount(int foodCount) {
+        game.setFoodCount(foodCount);
     }
 }

@@ -100,4 +100,14 @@ public class GameScene implements UIDataListener {
     public void updateSize(int width, int height) {
         gameSize = width;
     }
+
+    @Override
+    public void updateTickDelay(int millis) {
+
+    }
+
+    @Override
+    public void updateFoodCount(int foodCount) {
+
+    }
 }
