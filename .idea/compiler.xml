@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="JavaSnake" target="18" />
+      <module name="JavaSnake" target="17" />
       <module name="snake-ui" target="18" />
     </bytecodeTargetLevel>
   </component>
